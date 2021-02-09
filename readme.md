@@ -127,9 +127,9 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	let cartRepository;
 
     	async function addItem (item) {
-    	... // domain logic
-      const cartItemId = await cartRepository.save(item);
-      return cartItemId;
+    	  ... // domain logic
+      	  const cartItemId = await cartRepository.save(item);
+      	  return cartItemId;
     	}
 
     	async function getAll () {
@@ -137,9 +137,9 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	}
 
     	return {
-    		cartRepository
+    	  cartRepository
     	  addItem,
-    		getAll,
+    	  getAll,
     	}
     }
 
@@ -164,13 +164,13 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	let cartRepository;
 
     	function setCartRepository (newCartRepository) {
-    		cartRepository = newCartRepository;
+    	  cartRepository = newCartRepository;
     	}
 
     	async function addItem (item) {
-    	... // domain logic
-      const cartItemId = await cartRepository.save(item);
-      return cartItemId;
+    	  ... // domain logic
+          const cartItemId = await cartRepository.save(item);
+          return cartItemId;
     	}
 
     	async function getAll () {
@@ -178,9 +178,9 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	}
 
     	return {
-    		setCartRepository,
+    	  setCartRepository,
     	  addItem,
-    		getAll,
+    	  getAll,
     	}
     }
 
@@ -207,9 +207,9 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	}
 
     	async function addItem (item) {
-    	... // domain logic
-      const cartItemId = await cartRepository.save(item);
-      return cartItemId;
+    	  ... // domain logic
+          const cartItemId = await cartRepository.save(item);
+          return cartItemId;
     	}
 
     	async function getAll () {
@@ -217,9 +217,9 @@ DI에는 총 3가지의 방법이 존재하며 다음과 같다
     	}
 
     	return {
-    		cartRepository
+    	  cartRepository
     	  addItem,
-    		getAll,
+    	  getAll,
     	}
     }
 
@@ -264,29 +264,28 @@ DI를 이용할 경우 test시 별도 mocking library를 사용할 필요 없이
 import { newCartService } from 'cartService'
 
 describe('test cart service', () => {
-	test('test add cart item', async () => {
-		const mockCartRepository = () => {
-			return {
-					getAll: () => {
-						return [
-							... // 객체
-						]
-					},
-					save: (item) => {
-						return 1;
-					}
-			}
-		}
-		const cartService = newCartService({cartRepository: mockCartRepository});
-		const item = {
-	    name: 'test item'
-    };
-		const expectCartItemId = 1;
-	
-		const insertedCartItemId = await cartService.addItem(item);
-		
-		expect(insertedCartItemId).toBe(expectCartItemId);
+  test('test add cart item', async () => {
+    const mockCartRepository = () => {
+      return {
+        getAll: () => {
+	  return [
+	    ... // 객체
+	  ]
+	},
+	save: (item) => {
+	  return 1;
 	}
+      }
+    }
+    const cartService = newCartService({cartRepository: mockCartRepository});
+    const item = {
+      name: 'test item'
+    };
+    const expectCartItemId = 1;
+
+    const insertedCartItemId = await cartService.addItem(item);
+    expect(insertedCartItemId).toBe(expectCartItemId);
+  }
 });
 ```
 
